@@ -47,6 +47,6 @@ jobs:
       #   run: CI=true npm test
 
       - name: Update
-        run: echo $(date) > test.txt && git add . && git commit -m "Update" && git push
+        run: echo $(date) > test.txt
 
       - uses: EndBug/add-and-commit@latest
