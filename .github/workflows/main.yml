@@ -1,35 +1,17 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Version
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+name: Bump version
 on:
   push:
-    branches: [master, main]
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+    branches:
+      - master
 jobs:
-  # This workflow contains a single job called "build"
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-    - name: Create local changes
-      run: |
-        ${{ secrets.TEST }} > test.txt
-    - name: Commit files
-      run: |
-        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
-        git commit -m "Add changes" -a
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.TOKEN }}
-        branch: ${{ github.ref }}
-        
-
+      - uses: actions/checkout@v2
+      - name: Test
+        runs: echo $(date) > test.txt
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5.5
+        with:
+          github_token: ${{ secrets.TOKEN }}
