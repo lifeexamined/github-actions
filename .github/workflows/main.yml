@@ -50,3 +50,5 @@ jobs:
         run: echo $(date) > test.txt
 
       - uses: EndBug/add-and-commit@latest
+        with:
+            default_author: github_actions
