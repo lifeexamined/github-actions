@@ -52,4 +52,6 @@ jobs:
       - uses: EndBug/add-and-commit@latest
         with:
           default_author: github_actions
+          author_name: Nikita Novik
+          author_email: nikita.a.novik@gmail.com
           github_token: ${{ secrets.TOKEN }}
